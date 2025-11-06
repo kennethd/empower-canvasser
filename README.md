@@ -70,10 +70,66 @@ Running `pnpm approve-builds` as suggested
 $ cd apps/frontend
 $ pnpm install -D tailwindcss @tailwindcss/postcss postcss
 ```
+Run the app from within the `apps/frontend` directory with: `pnpm run dev` & visit the dev site (for me it is http://192.168.1.9:3000)
 
+Upon launch, another warning:
+<div class="warn">
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /home/kenneth/git/empower-canvasser/pnpm-lock.yaml as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * /home/kenneth/git/empower-canvasser/apps/frontend/pnpm-lock.yaml
+</div>
+
+### tsconfig.json
+Continuing to follow https://medium.com/@serdar.ulutas/a-simple-monorepo-setup-with-next-js-and-express-js-4bbe0e99b259
+
+Create a `tsconfig.json` @ root of monorepo:
+```json
+{
+ "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@shared/*": ["packages/shared/src/*"]
+    }
+  },
+  "files": [],
+  "references": [
+    { "path": "packages/shared" },
+    { "path": "apps/frontend" },
+    { "path": "apps/backend" }
+  ]
+}
+```
+And `packages/shared/tsconfig.json`:
+```json
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "module": "ESNext",
+    "target": "ES2020",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "strict": true
+  },
+  "include": ["src"]
+}
+```
+### first shared type def
+Create your first shared type in `packages/shared/src/types.ts`:
+```ts
+export interface User {
+  name: string;
+  email: string;
+}
+```
 
 
 
 <style type="text/css" rel="stylesheet">
-.warn { background-color: yellow; margin: 6px; padding: 6px; }
+.warn { background-color: yellow; margin: 6px; padding: 6px; white-space: pre-wrap; }
 </style>
