@@ -119,6 +119,7 @@ And `packages/shared/tsconfig.json`:
   "include": ["src"]
 }
 ```
+
 ### first shared type def
 Create your first shared type in `packages/shared/src/types.ts`:
 ```ts
@@ -128,7 +129,41 @@ export interface User {
 }
 ```
 
-
+### init backend express app
+```sh
+$ cd apps/backend
+$ pnpm init
+$ git add package.json && git commit -m "backend app: pnpm init: creates package.json"
+$ pnpm add express mongoose cors
+$ echo /apps/backend/node_modules >> ../../.gitignore
+$ git add  ../../.gitignore  package.json  ../../pnpm-lock.yaml
+$ git commit -m "pnpm add express mongoose cors"
+$ pnpm add -D typescript ts-node-dev @types/node @types/express @types/cors
+$ git commit -am "pnpm add -D typescript ts-node-dev @types/node @types/express @types/cors"
+```
+Add `apps/backend/tsconfig.json`:
+```json
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "CommonJS",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}
+```
+And update the backend app `package.json`
+```json
+"scripts": {
+  "dev": "ts-node-dev src/index.ts",
+  "test": "echo \"Error: no test specified\" && exit 1"
+},
+```
 
 <style type="text/css" rel="stylesheet">
 .warn { background-color: yellow; margin: 6px; padding: 6px; white-space: pre-wrap; }
