@@ -157,13 +157,41 @@ Add `apps/backend/tsconfig.json`:
   "include": ["src"]
 }
 ```
-And update the backend app `package.json`
+And update the `scripts` for backend app `package.json` to add `dev` command:
 ```json
 "scripts": {
   "dev": "ts-node-dev src/index.ts",
   "test": "echo \"Error: no test specified\" && exit 1"
 },
 ```
+
+### update frontend app to use shared type def
+Edit `apps/frontend/tsconfig.json`:
+```diff
+index cf9c65d..853069d 100644
+--- a/apps/frontend/tsconfig.json
++++ b/apps/frontend/tsconfig.json
+@@ -1,4 +1,5 @@
+ {
++  "extends": "../../tsconfig.json",
+   "compilerOptions": {
+     "target": "ES2017",
+     "lib": ["dom", "dom.iterable", "esnext"],
+@@ -30,5 +31,10 @@
+     ".next/dev/types/**/*.ts",
+     "**/*.mts"
+   ],
+-  "exclude": ["node_modules"]
++  "exclude": ["node_modules"],
++  "references": [
++    {
++      "path": "../../packages/shared"
++    }
++  ]
+ }
+```
+And add `apps/frontend/src/page.tsx` as seen in our [guide](https://medium.com/@serdar.ulutas/a-simple-monorepo-setup-with-next-js-and-express-js-4bbe0e99b259)
+
 
 <style type="text/css" rel="stylesheet">
 .warn { background-color: yellow; margin: 6px; padding: 6px; white-space: pre-wrap; }
