@@ -13,7 +13,7 @@ Development will be done locally via a monorepo including both front & back end
 
 
 
-# project setup
+# monorepo setup
 Dev env/test deployment server is the same machine running:
 ```sh
 $ node --version ; npm --version
@@ -43,29 +43,30 @@ Which in turn links to [Painless monorepo management with bit](https://bit.dev/b
 looks promising, very superficial googling suggests `lerna` is still more
 widely adopted.  I'll defer that decision for now until build-&-deploy-time
 
+For now, silence the warning by creating `pnpm-workspace.yaml`:
+```yaml
+packages:
+  - 'apps/*'
+  # all packages in direct subdirs of packages/
+  - 'packages/*'
+  # exclude packages that are inside test directories
+  - '!**/test/**'
+```
+
 Back to the [tutorial promising to result in a functioning monorepo project](https://medium.com/@serdar.ulutas/a-simple-monorepo-setup-with-next-js-and-express-js-4bbe0e99b259)
 ```sh
 $ mkdir -p apps/frontend apps/backend/src packages/shared/src
-$ pnpm create next-app apps/frontend --app --ts --eslint --tailwind --src-dir
+$ pnpm create next-app apps/frontend --app --ts --eslint --tailwind --src-dir --react-compiler --no-turbopack --no-import-alias
 ```
-Not sure why that guide avoids `Turbopack`, revisit later.
-<div class="output">
- WARN  The "workspaces" field in package.json is not supported by pnpm. Create a "pnpm-workspace.yaml" file instead.
-✔ Would you like to use React Compiler? … No / Yes
-✔ Would you like to use Turbopack? (recommended) … No / Yes
-✔ Would you like to customize the import alias (`@/*` by default)? … No / Yes
-Creating a new Next.js app in /tmp/mono-react/apps/frontend.
-
-Using pnpm.
-
-Initializing project with template: app-tw
-
-
-Installing dependencies:
-- react
-- react-dom
-- next
+Not sure why that guide avoids `Turbopack`, revisit later.  We do get more warnings:
+<div class="warn">
+Ignored build scripts: sharp, unrs-resolver. <br />
+Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
 </div>
 
 
 
+
+<style type="text/css" rel="stylesheet">
+.warn { background-color: yellow; margin: 6px; padding: 6px; }
+</style>
