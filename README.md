@@ -29,9 +29,10 @@ Update `package.json` per commit `0ad80e8`
 $ pnpm install
 ```
 Throws a warning:
-<div class="warn">
+
+[!WARNING]
 The "workspaces" field in package.json is not supported by pnpm. Create a "pnpm-workspace.yaml" file instead.
-</div>
+
 Which brings me to the [Lerna Project](https://lerna.js.org/docs/recipes/using-pnpm-with-lerna), billed as *"The Original Tool for JavaScript Monorepos"*
 
 That page links to this intro to [pnpm workspaces](https://pnpm.io/workspaces), which seems to just mean "monorepo"
@@ -59,10 +60,11 @@ $ mkdir -p apps/frontend apps/backend/src packages/shared/src
 $ pnpm create next-app apps/frontend --app --ts --eslint --tailwind --src-dir --react-compiler --no-turbopack --no-import-alias
 ```
 Not sure why that guide avoids `Turbopack`, revisit later.  We do get more warnings:
-<div class="warn">
+
+[!WARNING]
 Ignored build scripts: sharp, unrs-resolver. <br />
 Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
-</div>
+
 Running `pnpm approve-builds` as suggested 
 
 ### install tailwindcss @ frontend app
@@ -73,14 +75,14 @@ $ pnpm install -D tailwindcss @tailwindcss/postcss postcss
 Run the app from within the `apps/frontend` directory with: `pnpm run dev` & visit the dev site (for me it is http://192.168.1.9:3000)
 
 Upon launch, another warning:
-<div class="warn">
- ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
- We detected multiple lockfiles and selected the directory of /home/kenneth/git/empower-canvasser/pnpm-lock.yaml as the root directory.
- To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
-   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
- Detected additional lockfiles: 
+
+[!WARNING]
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct. <br />
+ We detected multiple lockfiles and selected the directory of /home/kenneth/git/empower-canvasser/pnpm-lock.yaml as the root directory. <br />
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed. <br />
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information. <br />
+ Detected additional lockfiles:  <br />
    * /home/kenneth/git/empower-canvasser/apps/frontend/pnpm-lock.yaml
-</div>
 
 ### tsconfig.json
 Continuing to follow https://medium.com/@serdar.ulutas/a-simple-monorepo-setup-with-next-js-and-express-js-4bbe0e99b259
@@ -192,7 +194,3 @@ index cf9c65d..853069d 100644
 ```
 And add `apps/frontend/src/page.tsx` as seen in our [guide](https://medium.com/@serdar.ulutas/a-simple-monorepo-setup-with-next-js-and-express-js-4bbe0e99b259)
 
-
-<style type="text/css" rel="stylesheet">
-.warn { background-color: yellow; margin: 6px; padding: 6px; white-space: pre-wrap; }
-</style>
