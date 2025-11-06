@@ -7,7 +7,6 @@ app.use(cors());
 
 app.get("/api/health", (_req, res) => {
   const user: User = {
-    id: "1",
     name: "John",
     email: "john@example.com"
   };
