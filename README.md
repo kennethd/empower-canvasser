@@ -30,8 +30,8 @@ $ pnpm install
 ```
 Throws a warning:
 
-[!WARNING]
-The "workspaces" field in package.json is not supported by pnpm. Create a "pnpm-workspace.yaml" file instead.
+> [!WARNING]
+> The "workspaces" field in package.json is not supported by pnpm. Create a "pnpm-workspace.yaml" file instead.
 
 Which brings me to the [Lerna Project](https://lerna.js.org/docs/recipes/using-pnpm-with-lerna), billed as *"The Original Tool for JavaScript Monorepos"*
 
@@ -61,9 +61,9 @@ $ pnpm create next-app apps/frontend --app --ts --eslint --tailwind --src-dir --
 ```
 Not sure why that guide avoids `Turbopack`, revisit later.  We do get more warnings:
 
-[!WARNING]
-Ignored build scripts: sharp, unrs-resolver. <br />
-Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
+> [!WARNING]
+> Ignored build scripts: sharp, unrs-resolver.
+> Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
 
 Running `pnpm approve-builds` as suggested 
 
@@ -76,13 +76,13 @@ Run the app from within the `apps/frontend` directory with: `pnpm run dev` & vis
 
 Upon launch, another warning:
 
-[!WARNING]
- ⚠ Warning: Next.js inferred your workspace root, but it may not be correct. <br />
- We detected multiple lockfiles and selected the directory of /home/kenneth/git/empower-canvasser/pnpm-lock.yaml as the root directory. <br />
- To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed. <br />
-   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information. <br />
- Detected additional lockfiles:  <br />
-   * /home/kenneth/git/empower-canvasser/apps/frontend/pnpm-lock.yaml
+> [!WARNING]
+>  ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+>  We detected multiple lockfiles and selected the directory of /home/kenneth/git/empower-canvasser/pnpm-lock.yaml as the root directory.
+>  To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+>    See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+>  Detected additional lockfiles:
+>    * /home/kenneth/git/empower-canvasser/apps/frontend/pnpm-lock.yaml
 
 ### tsconfig.json
 Continuing to follow https://medium.com/@serdar.ulutas/a-simple-monorepo-setup-with-next-js-and-express-js-4bbe0e99b259
