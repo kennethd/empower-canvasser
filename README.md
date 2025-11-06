@@ -12,8 +12,7 @@ Deployment will be containerized with Docker
 Development will be done locally via a monorepo including both front & back end
 
 
-
-# monorepo setup
+## monorepo setup
 Dev env/test deployment server is the same machine running:
 ```sh
 $ node --version ; npm --version
@@ -53,6 +52,7 @@ packages:
   - '!**/test/**'
 ```
 
+### create directory structure for separate frontend & backend apps
 Back to the [tutorial promising to result in a functioning monorepo project](https://medium.com/@serdar.ulutas/a-simple-monorepo-setup-with-next-js-and-express-js-4bbe0e99b259)
 ```sh
 $ mkdir -p apps/frontend apps/backend/src packages/shared/src
@@ -63,6 +63,13 @@ Not sure why that guide avoids `Turbopack`, revisit later.  We do get more warni
 Ignored build scripts: sharp, unrs-resolver. <br />
 Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.
 </div>
+Running `pnpm approve-builds` as suggested 
+
+### install tailwindcss @ frontend app
+```sh
+$ cd apps/frontend
+$ pnpm install -D tailwindcss @tailwindcss/postcss postcss
+```
 
 
 
