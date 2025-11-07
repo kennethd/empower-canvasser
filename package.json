@@ -1,5 +1,5 @@
 {
-  "name": "kitchen-sink",
+  "name": "empower-canvasser",
   "private": true,
   "scripts": {
     "build": "turbo run build",
