@@ -41,7 +41,7 @@ The `--no-git` and `-p pnpm` options seem to have been ignored, so
 ```sh
 kenneth@fado /tmp $ rm -rf ./empower-canvasser/.git
 kenneth@fado /tmp $ cd ~/git/empower-canvasser
-kenneth@fado ~/git/empower-canvasser (turbo-kitchen-sink) $ rsync -rv /tmp/empower-canvasser/ .
+kenneth@fado ~/git/empower-canvasser (turbo-kitchen-sink) $ rsync -rv --links /tmp/empower-canvasser/ .
 ```
 Rename `storefront` to `canvasser`:
 ```
@@ -67,5 +67,16 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 kenneth@fado ~/git/empower-canvasser (turbo-kitchen-sink) $ grep -irI storefront .                                                                           kenneth@fado ~/git/empower-canvasser (turbo-kitchen-sink) $
 kenneth@fado ~/git/empower-canvasser (turbo-kitchen-sink) $ git mv apps/storefront/ apps/canvasser
+```
+Ultimately I had to blow away & recreate `node_modules` by running `pnpm
+update` due to linting errors that weren't happening in the `/tmp` directory,
+but finally `pnpm run lint`, `pnpm run test` & `pnpm run dev` all worked,
+though each of them seriously messed up my terminal.
+
+Perhaps correcting these warnings will improve that:
+```
+ WARNING  no output files found for task @repo/logger#test. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task @repo/ui#test. Please check your `outputs` key in `turbo.json`
+ WARNING  no output files found for task api#test. Please check your `outputs` key in `turbo.json`
 ```
 
