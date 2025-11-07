@@ -84,7 +84,7 @@ functional linter.
 
 See the [installation log](INSTALL.md) if you're curious about that setup process.
 
-## tech choices part three: express + mysql integration
+## tech choices part three: mysql container
 We start with installing `node.js` bindings for `mysql2` (older `mysql` library does not have parameter binding):
 ```sh
 $ pnpm add mysql2 --filter api
@@ -99,7 +99,8 @@ $ docker-compose up
 The [MySQL Docker images](https://hub.docker.com/_/mysql/) provides a mechanism
 for initializing a db upon startup.  For the moment, I am not going to tackle
 persistent storage for this project, but it would probably take the shape of
-mounted docker volumes.  For now, each restart will recreate the db from scratch.
+mounted docker volumes.  For now, each restart will recreate the db from scratch,
+a few rows have been added during initialization.
 
 To verify your container is working:
 ```sh
@@ -113,5 +114,11 @@ Enter password:
 |  3 |            3 |            1 | Spoke to Kenneth about translating between product/tech requirements             | 2025-11-07 18:55:20 |
 +----+--------------+--------------+----------------------------------------------------------------------------------+---------------------+
 ```
+
+## tech choices part four: Express REST API
+
+
+## tech choices part five: Next.js integration with Express API
+
 
 
