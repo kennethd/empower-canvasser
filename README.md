@@ -6,8 +6,35 @@ This is a simple proof-of-concept app for collecting notes while on the move,
 canvassing door-to-door or in your community.
 
 # quick start
+You'll need a few dev tools to interact with the project, versions of things
+I've used to build it are:
 
+  * `node ---version`: v25.1.0
+  * `pnpm --version`: 8.15.6
+  * `turbo --version`: 2.6.0
+  * `docker --version`: 20.10
 
+Start the database (this will remain in foreground of terminal tab)
+```sh
+$ docker-compose up
+```
+Start the apps (again, this will take over terminal used to launch it)
+```sh
+$ turbo run dev
+```
+Apps should launch locally at:
+
+  * Canvasser Next.js app: http://localhost:3002/
+  * Express API server: http://localhost:5001
+
+## lagniappe
+
+In addition, the `turborepo` kickstarter recipe I used to create a monorepo
+with multiple frontend & API server apps created a couple more I have done
+nothing with...
+
+  * Admin Vite app (sharing components/types w/Next.js): http://localhost:3001/
+  * Blog Remix app: seems to bind only to `localhost` on port 5173
 
 # product roadmap
 
@@ -16,7 +43,7 @@ canvassing door-to-door or in your community.
 
 # tech todos
 
-  * 
+  * add all services to `docker-compose.yaml`
   * examine security options: helmet, ...
 
 # system acrchitecture
