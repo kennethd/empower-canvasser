@@ -14,6 +14,11 @@ canvassing door-to-door or in your community.
   * Create a `Tag` system allowing quick identifying (& retrieval) of Party
     affiliation, passion topics, org assocoations, etc
 
+# tech todos
+
+  * 
+  * examine security options: helmet, ...
+
 # system acrchitecture
 The app is comprised of a few components:
 
