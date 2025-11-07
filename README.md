@@ -53,9 +53,9 @@ functional linter.
 See the [installation log](INSTALL.md) if you're curious about that setup process.
 
 ## tech choices part three: express + mysql integration
-We start with installing `node.js` bindings for `mysql`:
+We start with installing `node.js` bindings for `mysql2` (older `mysql` library does not have parameter binding):
 ```sh
-$ pnpm add mysql --filter api
+$ pnpm add mysql2 --filter api
 ```
 
 I am imposing a project requirement for [Docker](https://hub.docker.com/_/mysql/)
