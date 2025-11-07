@@ -1,40 +1,59 @@
-# Turborepo kitchen sink starter
+# empower-canvasser
 
-This Turborepo starter is maintained by the Turborepo core team.
+Welcome!
 
-This example also shows how to use [Workspace Configurations](https://turborepo.com/docs/core-concepts/monorepos/configuring-workspaces).
+This is a simple proof-of-concept app for collecting notes while on the move,
+canvassing door-to-door or in your community.
 
-## Using this example
+# quick start
 
-Run the following command:
 
-```sh
-npx create-turbo@latest -e kitchen-sink
-```
 
-## What's inside?
+# roadmap
 
-This Turborepo includes the following packages and apps:
 
-### Apps and Packages
 
-- `api`: an [Express](https://expressjs.com/) server
-- `canvasser`: a [Next.js](https://nextjs.org/) app
-- `admin`: a [Vite](https://vitejs.dev/) single page app
-- `blog`: a [Remix](https://remix.run/) blog
-- `@repo/eslint-config`: ESLint configurations used throughout the monorepo
-- `@repo/jest-presets`: Jest configurations
-- `@repo/logger`: isomorphic logger (a small wrapper around console.log)
-- `@repo/ui`: a dummy React UI library (which contains `<CounterButton>` and `<Link>` components)
-- `@repo/typescript-config`: tsconfig.json's used throughout the monorepo
+# system acrchitecture
 
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
+The app is comprised of a few components:
 
-### Utilities
+  * A [TypeScript](https://www.typescriptlang.org/docs/) [react](https://react.dev/learn) web app front-end
+  * A [TypeScript](https://www.typescriptlang.org/docs/) [node.js](https://nodejs.org/docs/latest/api/) API server backend
+  * A MySQL database
 
-This Turborepo has some additional tools already setup for you:
+See the [Project Requirements](PROJECT.md) for more detail.
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Jest](https://jestjs.io) test runner for all things JavaScript
-- [Prettier](https://prettier.io) for code formatting
+Additionally, my choices have been influenced by personal preferences for:
+
+  * Support for container-based deployment (pref Docker)
+  * Support for testing frameworks & testing-first dev style
+  * Support for monorepo-based dev workflows
+
+## tech choices part one: next.js
+
+There was a bit of a long, circuituous process in landing on a set of tech to
+use, for a few hours on the first day, I refreshed my memory a bit about react
+frameworks & landed on [Next.js](https://nextjs.org/docs) as a promising candidate for first choice.
+
+On the second day I put together a [simple-monorepo branch](https://github.com/kennethd/empower-canvasser/tree/simple-monorepo)
+based on [Next.js](https://nextjs.org/docs) for the front-end and
+[Express](https://expressjs.com/en/guide/) for the backend, got to the
+point of being able to launch those components separately, and continued my
+journey exploring tooling options for managing monorepos in the modern
+javascript ecosystem.
+
+## tech choices part two: turbo
+
+At the very last stage of part one, a `pnpm run dev` command complained about
+the lack of a turbo config, which led me to discover the [turborepo project](https://turborepo.com/docs)
+which provides a sort of meta framework, almost platform development-style
+scaffolding to create multiple apps in a monorepo environment, already
+integrated with [jest](https://jestjs.io/) test runner, already enforcing 
+[TypeScript](https://www.typescriptlang.org/docs/), and already including a
+functional linter.
+
+See the [installation log](INSTALL.md) if you're curious about that setup process.
+
+
+
+

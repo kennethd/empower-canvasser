@@ -1,8 +1,8 @@
 # turborepo - first experience
-I was unable to run `create-turbo` on a branch of an existing repo, even after
-removing all files except the `.git` directory, which I want to keep as it
-includes history of other branches, so 
-
+I was unable to run `create-turbo` on a branch of an existing repo, it
+complained of a mysterious file conflict even after removing all files except
+the `.git` directory, which I want to keep as it includes history of other
+branches, so 
 ```sh
 kenneth@fado ~/git/empower-canvasser (turbo-kitchen-sink) $ cd /tmp/
 kenneth@fado /tmp $ npx create-turbo@latest  -e kitchen-sink -p pnpm --no-git
@@ -82,7 +82,7 @@ though each of them seriously messed up my terminal.
 It seems like "not using putty" is the solution for the terminal problem.
 
 Using OpenSSH from windows terminal to run `turbo run dev` provides a nice
-`ncurses?` interface, allowing switching between outputs from the various
+`ncurses`? interface, allowing switching between outputs from the various
 kitchen sink components, and determin which is running on what port:
 
   * Canvasser Next.js app: http://192.168.1.9:3002/
