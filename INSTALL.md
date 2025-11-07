@@ -73,10 +73,22 @@ update` due to linting errors that weren't happening in the `/tmp` directory,
 but finally `pnpm run lint`, `pnpm run test` & `pnpm run dev` all worked,
 though each of them seriously messed up my terminal.
 
-Perhaps correcting these warnings will improve that:
+~~Perhaps correcting these warnings will improve that:~~
 ```
  WARNING  no output files found for task @repo/logger#test. Please check your `outputs` key in `turbo.json`
  WARNING  no output files found for task @repo/ui#test. Please check your `outputs` key in `turbo.json`
  WARNING  no output files found for task api#test. Please check your `outputs` key in `turbo.json`
 ```
+It seems like "not using putty" is the solution for the terminal problem.
+
+Using OpenSSH from windows terminal to run `turbo run dev` provides a nice
+`ncurses?` interface, allowing switching between outputs from the various
+kitchen sink components, and determin which is running on what port:
+
+  * Canvasser Next.js app: http://192.168.1.9:3002/
+  * Express API server: http://192.168.1.9:5001
+  * Admin Vite app (sharing components/types w/Next.js): http://192.168.1.9:3001/
+  * Blog Remix app: seems to bind only to `localhost` on port 5173
+
+
 
