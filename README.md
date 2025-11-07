@@ -102,7 +102,7 @@ persistent storage for this project, but it would probably take the shape of
 mounted docker volumes.  For now, each restart will recreate the db from scratch,
 a few rows have been added during initialization.
 
-To verify your container is working:
+To verify your container is working (password is 'GoMamdani2026!'):
 ```sh
 $ docker exec -it empower-canvasser_db_1 mysql -D canvas_app -u canvasapp -p -e "SELECT * FROM canvas_activity;"
 Enter password:
