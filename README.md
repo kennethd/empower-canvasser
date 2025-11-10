@@ -14,6 +14,11 @@ I've used to build it are:
   * `turbo --version`: 2.6.0
   * `docker --version`: 20.10
 
+The project uses `pnpm` for package management, so start with
+```sh
+$ pnpm install
+```
+
 Start the database (this will remain in foreground of terminal tab)
 ```sh
 $ docker-compose up
