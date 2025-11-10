@@ -4,6 +4,7 @@
   "tasks": {
     "build": {
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "env": ["DBHOST", "DBPORT", "DBNAME", "DBUSER", "DBPASS"],
       "dependsOn": ["^build"],
       "outputs": [
         "build/**",

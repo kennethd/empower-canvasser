@@ -49,7 +49,7 @@ nothing with...
 
   * make all ports configurable by env
   * add all services to `docker-compose.yaml` for deploy/CI envs
-  * examine security options: helmet, ...
+  * examine security options: helmet, https://expressjs.com/en/advanced/best-practice-security.html
 
 # system acrchitecture
 The app is comprised of a few components:

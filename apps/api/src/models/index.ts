@@ -1,10 +1,11 @@
-import type { Sequelize } from "sequelize";
-import { DBHOST, DBPORT, DBPORT, DBUSER, DBPASS } from "../../dbconfig.ts";
+import Sequelize from "sequelize"
 import { initModels } from "./init-models.ts";
 
-const sequelize = new Sequelize(DBNAME, DBUSER, DBPASS, {
-  host: DBHOST,
-  port: DBPORT,
+const sequelize = new Sequelize(process.env.DBNAME,
+                                process.env.DBUSER,
+                                process.env.DBPASS, {
+  host: process.env.DBHOST,
+  port: process.env.DBPORT,
   dialect: "mysql",
   pool: {
     // max connections in pool
@@ -18,10 +19,9 @@ const sequelize = new Sequelize(DBNAME, DBUSER, DBPASS, {
   }
 });
 
-const db = {};
+export const db = {
+  Sequelize: Sequelize,
+  sequelize: sequelize,
+  models: initModels(sequelize)
+};
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
-db.models = initModels(sequelize);
-
-module.exports = db;
