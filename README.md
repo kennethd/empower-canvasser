@@ -49,6 +49,7 @@ nothing with...
 
   * make all ports configurable by env
   * add all services to `docker-compose.yaml` for deploy/CI envs
+  * put app server running on 3002 behind HTTPS proxy with certbot
   * examine security options: helmet, https://expressjs.com/en/advanced/best-practice-security.html
 
 # system acrchitecture
@@ -145,13 +146,48 @@ $ ./apps/api/node_modules/.bin/sequelize-auto --dialect mysql -l ts \
     -o ./apps/api/src/models/ -h localhost -u canvasapp -d canvas_app -x
 ```
 
-
-
 ## tech choices part five: Express REST API
+The API is defined in `./apps/api/src/server.ts`, essentially proxying
+requests to the ORM with perhaps some type validation or coercion:
+```ts
+import { db } from "./models/index.ts";
+// [...a bunch of other imports...]
+import express, { type Express } from "express";
+
+export const createServer = (): Express => {
+  const app = express();
+  app
+    // [...a bunch of other initialization...]
+
+    .get('/activities', function(req, res) {
+      db.models.canvas_activity.findAll().then(activities => res.json(activities));
+    })
+
+    .get('/canvassees', function(req, res) {
+      db.models.canvassee.findAll().then(canvassees => res.json(canvassees));
+    })
+
+    .get('/canvassers', function(req, res) {
+      db.models.canvasser.findAll().then(canvassers => res.json(canvassers));
+    })
+
+  ;
+  return app;
+};
+```
 
 ## tech choices part six: Next.js integration with Express API
 
 
+## postman collection
+The `postman` directory contains exported environment & collection settings.
 
+The `CANVASSER_API_URL` value from the environment will need a value, other
+vars are not currently being used.  You can try `http://canvas.highball.org:5001`
+which runs out of my apartment, it may or may not be up & running.
 
+If it is up, the front-end should also be available @ http://canvas.highball.org:3002
+
+(`highball.org` is an old domain I still have for a band I used to be in called
+"U.S. Highball" -- not the same as the Scottish guys who use that name :smile:)
 
