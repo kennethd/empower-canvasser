@@ -1,5 +1,8 @@
 {
   "extends": "@repo/typescript-config/base.json",
+  "target": "es6",
+  "experimentalDecorators": true,
+  "emitDecoratorMetadata": true,
   "compilerOptions": {
     "lib": ["ES2015"],
     "outDir": "./dist"
