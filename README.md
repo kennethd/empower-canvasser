@@ -18,6 +18,10 @@ The project uses `pnpm` for package management, so start with
 ```sh
 $ pnpm install
 ```
+Or, if it's been awhile
+```sh
+$ pnpm up --recursive
+```
 
 Start the database (this will remain in foreground of terminal tab)
 ```sh
@@ -207,7 +211,9 @@ integrate with the data access API, which seems to me a much more maintainable
 separation of concerns in the long term.
 
 Of the guides I found [this one](https://dev.to/joodi/fetching-data-with-axios-in-nextjs-15-a-complete-guide-hed)
-seems closest to meeting my objectives.
+seems closest to meeting my objectives ([this comment](https://dev.to/joodi/fetching-data-with-axios-in-nextjs-15-a-complete-guide-hed#comment-30k1e)
+on that page is interesting -- it points out this approach loses some built-in
+caching benefits when used in a *Next.js* `ServerComponent`).
 
 Add `axios` to the `canvasser` app's dependencies:
 ```sh
@@ -215,7 +221,75 @@ $ pnpm add axios --filter canvasser
 ```
 
 
+## testing components with jest
+Quick example of custom `ServerComponent` test with `jest`, component looks something like:
+```ts
+async function fetchActivities(): Promise<Activity[]> {
+  const response = await axios.get(API_SERVER_URL + '/activities');
+  return response.data;
+}
+
+export default async function ActivitiesLog() {
+  const activities = await fetchActivities();
+
+  return (
+
+    <div id="activity-log-div">
+      <table>
+        <tbody>
+
+        {activities.map((activity) => (
+
+          <tr id={ 'activity_' + activity.id }>
+            <td>{activity.created.split('.')[0].replace('T', ' ')}</td>
+            <td>{activity.canvasser.name}</td>
+            <td>{activity.canvassee.name}</td>
+            <td>
+                {activity.canvassee.email} <br />
+                {activity.canvassee.mobile}
+            </td>
+            <td>{activity.notes}</td>
+          </tr>
+
+        ))}
+
+        </tbody>
+      </table>
+    </div>
+    
+  );
+}
+```
+To test the call to the API server is mocked at the underlying `axios` library
+level, the contents of data fixture `./activities.json` has been copied from
+postman response to actual endpoint.
+
+This test only verifies `render()` doesn't blow up, a more complete test might
+check for expected page elements, or if there are plans for e2e testing with a
+prepared dataset, it's usually more appropriate to test UI elements there:
+```ts
+import { describe, it } from "@jest/globals";
+import { createRoot } from "react-dom/client";
+import { ActivityLog } from ".";
+import * as responseBody from './activities.json';
+
+describe("ActivityLog", () => {
+  it("renders without crashing", () => {
+
+    const mockAxios = jest.genMockFromModule('axios');
+    mockAxios.get = jest.fn(() => Promise.resolve({ data: responseBody }));
+
+    const div = document.createElement("div");
+    const root = createRoot(div);
+    root.render(<ActivityLog />);
+    root.unmount();
+  });
+});
+```
+
 ## next steps: adding something like auth
+I don't want to implemement an auth system for this, but to test the UI let's
+add a link to the list of canvassers to impersonate/"log in" as one of those.
 
 
 # postman collection

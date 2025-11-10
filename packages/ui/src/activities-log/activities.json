@@ -1,0 +1,71 @@
+[
+    {
+        "id": 1,
+        "canvasser_id": 1,
+        "canvassee_id": 1,
+        "notes": "Spoke to Kenneth about NYC Mayoral election 2025",
+        "created": "2025-11-10T00:26:56.000Z",
+        "canvasser": {
+            "id": 1,
+            "name": "Sam",
+            "email": "sam@example.com",
+            "mobile": "415-555-4145",
+            "created": "2025-11-10T00:26:56.000Z"
+        },
+        "canvassee": {
+            "id": 1,
+            "name": "Kenneth",
+            "email": "kenneth@example.com",
+            "mobile": "212-555-1212",
+            "sms_ok": 0,
+            "street_address": null,
+            "created": "2025-11-10T00:26:56.000Z"
+        }
+    },
+    {
+        "id": 2,
+        "canvasser_id": 2,
+        "canvassee_id": 1,
+        "notes": "Spoke to Kenneth about aspirations as an individual contributor",
+        "created": "2025-11-10T00:26:56.000Z",
+        "canvasser": {
+            "id": 2,
+            "name": "Daryl",
+            "email": "daryl@example.com",
+            "mobile": "202-555-2020",
+            "created": "2025-11-10T00:26:56.000Z"
+        },
+        "canvassee": {
+            "id": 1,
+            "name": "Kenneth",
+            "email": "kenneth@example.com",
+            "mobile": "212-555-1212",
+            "sms_ok": 0,
+            "street_address": null,
+            "created": "2025-11-10T00:26:56.000Z"
+        }
+    },
+    {
+        "id": 3,
+        "canvasser_id": 3,
+        "canvassee_id": 1,
+        "notes": "Spoke to Kenneth about navigating between product/tech requirements",
+        "created": "2025-11-10T00:26:56.000Z",
+        "canvasser": {
+            "id": 3,
+            "name": "Lauren",
+            "email": "lauren@example.com",
+            "mobile": "206-555-2020",
+            "created": "2025-11-10T00:26:56.000Z"
+        },
+        "canvassee": {
+            "id": 1,
+            "name": "Kenneth",
+            "email": "kenneth@example.com",
+            "mobile": "212-555-1212",
+            "sms_ok": 0,
+            "street_address": null,
+            "created": "2025-11-10T00:26:56.000Z"
+        }
+    }
+]

@@ -27,7 +27,7 @@
     },
     "dev": {
       "outputs": [],
-      "env": ["DBHOST", "DBPORT", "DBNAME", "DBUSER", "DBPASS"],
+      "env": ["API_SERVER_URL", "DBHOST", "DBPORT", "DBNAME", "DBUSER", "DBPASS"],
       "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
