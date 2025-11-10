@@ -39,6 +39,20 @@ export const createServer = (): Express => {
       db.models.canvassee.findAll().then(canvassees => res.json(canvassees));
     })
 
+    .put('/canvassees', function(req, res) {
+      // TODO: raise error if name is empty
+      // TODO: try/catch
+      db.models.canvassee.create({
+        name: req.body.name,
+        email: req.body.email,
+        moblie: req.body.mobile,
+        sms_ok: req.body.sms_ok,
+        street_address: req.body.street_address,
+      }).then(function(canvassee) {
+        res.json(canvassee);
+      });
+    })
+
     .get('/canvassers', function(req, res) {
       db.models.canvasser.findAll().then(canvassers => res.json(canvassers));
     })
