@@ -179,6 +179,32 @@ export const createServer = (): Express => {
 ```
 
 ## dev choices part six: Next.js integration with Express API
+Full circle back to dev choice part one, it is time to implement a front-end.
+
+There are a lot of options for combining the strengths of Express & Next.js,
+my decision to use both came down to:
+
+  * having ***some*** personal experience with express
+  * separation of concerns: *express* being the data access API for potentially
+    multiple front-ends
+  * opportunity to explore *Next.js* features, particularly learning about
+    combining `ServerComponents` and `ClientComponents` to maximize perfomance
+    and UX reactiveness
+
+There are a lot of tutorials about leveraging the strengths of express & Next.js
+by creating a single hybrid app, coming from experience with Angular.js front-ends
+and usually Python, sometimes .NET or PHP, backends, my instinct is to use
+something like [axios](https://axios-http.com/docs/intro) from Next.js to
+integrate with the data access API, which seems to me a much more maintainable
+separation of concerns in the long term.
+
+Of the guides I found [this one](https://dev.to/joodi/fetching-data-with-axios-in-nextjs-15-a-complete-guide-hed)
+seems closest to meeting my objectives.
+
+Add `axios` to the `canvasser` app's dependencies:
+```sh
+$ pnpm add axios --filter canvasser
+```
 
 
 ## postman collection
