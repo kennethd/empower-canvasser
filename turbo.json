@@ -4,7 +4,6 @@
   "tasks": {
     "build": {
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "env": ["DBHOST", "DBPORT", "DBNAME", "DBUSER", "DBPASS"],
       "dependsOn": ["^build"],
       "outputs": [
         "build/**",
@@ -19,12 +18,16 @@
       "dependsOn": []
     },
     "lint": {
+      "outputs": [],
       "dependsOn": ["^build", "^lint"]
     },
     "check-types": {
+      "outputs": [],
       "dependsOn": ["^build", "^check-types"]
     },
     "dev": {
+      "outputs": [],
+      "env": ["DBHOST", "DBPORT", "DBNAME", "DBUSER", "DBPASS"],
       "dependsOn": ["^build"],
       "cache": false,
       "persistent": true

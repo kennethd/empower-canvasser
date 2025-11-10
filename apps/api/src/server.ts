@@ -1,7 +1,8 @@
+import { db } from "./models/index.ts";
 import { json, urlencoded } from "body-parser";
-import express, { type Express } from "express";
 import morgan from "morgan";
 import cors from "cors";
+import express, { type Express } from "express";
 
 const corsOptions = {
   // TODO: hardcoded port bad.
@@ -30,6 +31,17 @@ export const createServer = (): Express => {
       return res.json({ message: `hello ${req.params.name}` });
     })
 
+    .get('/activities', function(req, res) {
+      db.models.canvas_activity.findAll().then(activities => res.json(activities));
+    })
+
+    .get('/canvassees', function(req, res) {
+      db.models.canvassee.findAll().then(canvassees => res.json(canvassees));
+    })
+
+    .get('/canvassers', function(req, res) {
+      db.models.canvasser.findAll().then(canvassers => res.json(canvassers));
+    })
 
   ;
   return app;
