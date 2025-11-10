@@ -56,7 +56,7 @@ nothing with...
   * put app server running on 3002 behind HTTPS proxy with certbot
   * examine security options: helmet, https://expressjs.com/en/advanced/best-practice-security.html
 
-# system acrchitecture
+# system architecture
 The app is comprised of a few components:
 
   * A [TypeScript](https://www.typescriptlang.org/docs/) [react](https://react.dev/learn) web app front-end
@@ -207,7 +207,8 @@ $ pnpm add axios --filter canvasser
 ```
 
 
-## postman collection
+
+# postman collection
 The `postman` directory contains exported environment & collection settings.
 
 The `CANVASSER_API_URL` value from the environment will need a value, other
