@@ -97,13 +97,13 @@ have docker set up locally, you should be able to start the server with:
 ```sh
 $ docker-compose up
 ```
-The [MySQL Docker images](https://hub.docker.com/_/mysql/) provides a mechanism
+The [MySQL Docker images](https://hub.docker.com/_/mysql/) provide a mechanism
 for initializing a db upon startup.  For the moment, I am not going to tackle
 persistent storage for this project, but it would probably take the shape of
 mounted docker volumes.  For now, each restart will recreate the db from scratch,
 a few rows have been added during initialization.
 
-To verify your container is working (password is 'GoMamdani2026!'):
+To verify your container is working (password is `GoMamdani2026!`):
 ```sh
 $ docker exec -it empower-canvasser_db_1 mysql -D canvas_app -u canvasapp -p -e "SELECT * FROM canvas_activity;"
 Enter password:
@@ -116,9 +116,7 @@ Enter password:
 +----+--------------+--------------+---------------------------------------------------------------------+---------------------+
 ```
 The script used to initialize the db within the container can be found @
-```
-./docker/mysql/docker-entrypoint-initdb.d/001-create-db.sql
-```
+[001-create-db.sql](https://github.com/kennethd/empower-canvasser/blob/main/docker/mysql/docker-entrypoint-initdb.d/001-create-db.sql)
 
 ## tech choices part four: Sequelizer ORM
 I don't always go the route of ORMs, but [Sequelize](https://sequelize.org/)
