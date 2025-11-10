@@ -40,6 +40,12 @@ Apps should launch locally at:
   * Canvasser Next.js app: http://localhost:3002/
   * Express API server: http://localhost:5001/status & http://localhost/message/world
 
+Commands to run tests/linter are:
+```sh
+$ turbo run lint
+$ turbo run test
+```
+
 ## lagniappe
 
 In addition, the `turborepo` kickstarter recipe I used to create a monorepo
