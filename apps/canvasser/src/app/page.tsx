@@ -6,16 +6,19 @@ export const metadata = {
   title: "Empower Canvasser",
 };
 
-export default function Store() {
-  log("Hey! This is the Store page.");
+export default function Canvasser() {
+  log("Welcome to Empower Canvasser!");
 
   return (
     <div className="container">
       <h1 className="title">
-        Store <br />
-        <span>Kitchen Sink</span>
+        Empower Canvasser
       </h1>
-      <CounterButton />
+
+
+
+
+
       <p className="description">
         Built With{" "}
         <Link href="https://turborepo.com" newTab>
@@ -24,6 +27,14 @@ export default function Store() {
         {" & "}
         <Link href="https://nextjs.org/" newTab>
           Next.js
+        </Link>
+        {" & "}
+        <Link href="https://expressjs.org/" newTab>
+          express.js
+        </Link>
+        {" & "}
+        <Link href="https://sequelize.org/" newTab>
+          Sequelize
         </Link>
       </p>
     </div>
