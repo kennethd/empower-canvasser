@@ -67,7 +67,7 @@ Additionally, my choices have been influenced by personal preferences for:
   * Support for testing frameworks & testing-first dev style
   * Support for monorepo-based dev workflows
 
-## tech choices part one: next.js
+## dev choices part one: next.js
 There was a bit of a long, circuituous process in landing on a set of tech to
 use, for a few hours on the first day, I refreshed my memory a bit about react
 frameworks & landed on [Next.js](https://nextjs.org/docs) as a promising candidate for first choice.
@@ -79,7 +79,7 @@ point of being able to launch those components separately, and continued my
 journey exploring tooling options for managing monorepos in the modern
 javascript ecosystem.
 
-## tech choices part two: turbo
+## dev choices part two: turbo
 At the very last stage of part one, a `pnpm run dev` command complained about
 the lack of a turbo config, which led me to discover the [turborepo project](https://turborepo.com/docs)
 which provides a sort of meta framework, almost platform development-style
@@ -90,7 +90,7 @@ functional linter.
 
 See the [installation log](INSTALL.md) if you're curious about that setup process.
 
-## tech choices part three: mysql container
+## dev choices part three: mysql container
 I am imposing a project requirement for [Docker](https://hub.docker.com/_/mysql/)
 to run the [MySQL](https://dev.mysql.com/doc/refman/8.4/en/) database.  If you
 have docker set up locally, you should be able to start the server with:
@@ -118,7 +118,7 @@ Enter password:
 The script used to initialize the db within the container can be found @
 [001-create-db.sql](https://github.com/kennethd/empower-canvasser/blob/main/docker/mysql/docker-entrypoint-initdb.d/001-create-db.sql)
 
-## tech choices part four: Sequelizer ORM
+## dev choices part four: Sequelizer ORM
 I don't always go the route of ORMs, but [Sequelize](https://sequelize.org/)
 looks like a good promise-based, expert-created data access layer with
 features like logging baked-in.  Also the approach is very familiar/similar to
@@ -144,7 +144,7 @@ $ ./apps/api/node_modules/.bin/sequelize-auto --dialect mysql -l ts \
     -o ./apps/api/src/models/ -h localhost -u canvasapp -d canvas_app -x
 ```
 
-## tech choices part five: Express REST API
+## dev choices part five: Express REST API
 The API is defined in `./apps/api/src/server.ts`, essentially proxying
 requests to the ORM with perhaps some type validation or coercion:
 ```ts
@@ -174,7 +174,7 @@ export const createServer = (): Express => {
 };
 ```
 
-## tech choices part six: Next.js integration with Express API
+## dev choices part six: Next.js integration with Express API
 
 
 ## postman collection
