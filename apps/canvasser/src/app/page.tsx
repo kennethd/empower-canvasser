@@ -1,6 +1,6 @@
 import { log } from "@repo/logger";
 import { Link } from "@repo/ui/link";
-import { CounterButton } from "@repo/ui/counter-button";
+import { ActivitiesServerComponent } from "@repo/ui/activity";
 
 export const metadata = {
   title: "Empower Canvasser",
@@ -15,9 +15,7 @@ export default function Canvasser() {
         Empower Canvasser
       </h1>
 
-
-
-
+      <ActivitiesServerComponent />
 
       <p className="description">
         Built With{" "}

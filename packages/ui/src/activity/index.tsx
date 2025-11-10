@@ -18,11 +18,26 @@ export default async function ActivitiesServerComponent() {
   return (
     <div>
 
-      <ul>
+      <table>
+          <tr>
+            <th>canvassee name</th>
+            <th>canvassee email</th>
+            <th>canvassee mobile</th>
+            <th>canvasser name</th>
+          </tr>
         {activities.map((activity) => (
-          <li key={activity.id}>{activity}</li>
+          <tr id={ 'activity_' + activity.id }>
+            <td>{activity.canvassee.name}</li>
+            <td>{activity.canvassee.email}</li>
+            <td>{activity.canvassee.mobile}</li>
+            <td>{activity.canvasser.name}</li>
+          </tr>
+          <tr>
+            <td colspan="4">{activity.notes}</td>
+          </tr>
         ))}
-      </ul>
+      </table>
+
     </div>
   );
 }

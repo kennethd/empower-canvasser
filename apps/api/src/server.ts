@@ -32,7 +32,13 @@ export const createServer = (): Express => {
     })
 
     .get('/activities', function(req, res) {
-      db.models.canvas_activity.findAll().then(activities => res.json(activities));
+      const opts = {
+        include: [
+          { association: 'canvasser', required: true, },
+          { association: 'canvassee', required: true, },
+        ],
+      };
+      db.models.canvas_activity.findAll(opts).then(activities => res.json(activities));
     })
 
     .get('/canvassees', function(req, res) {

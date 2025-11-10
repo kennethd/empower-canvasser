@@ -42,6 +42,7 @@ nothing with...
 
 # product roadmap
 
+  * Activity & Canvasee lists will need filtering & pagination pretty quick
   * Create a `Tag` system allowing quick identifying (& retrieval) of Party
     affiliation, passion topics, org assocoations, etc
   * Managing users in the `canvassers` table would be a good use for the Admin
@@ -51,6 +52,8 @@ nothing with...
 
 # tech todos
 
+  * Implement "soft deletes" @ model level, never delete rows from db, but
+    flip a boolean `hidden`/`deleted` boolean column value
   * make all ports configurable by env
   * add all services to `docker-compose.yaml` for deploy/CI envs
   * put app server running on 3002 behind HTTPS proxy with certbot
@@ -206,6 +209,8 @@ Add `axios` to the `canvasser` app's dependencies:
 $ pnpm add axios --filter canvasser
 ```
 
+
+## next steps: adding something like auth
 
 
 # postman collection
