@@ -19,7 +19,11 @@ Start the database (this will remain in foreground of terminal tab)
 $ docker-compose up
 ```
 Start the apps (again, this will take over terminal used to launch it)
+
+The API depends on some shell environment vars which will be exported to your
+env when you source `dev.env` (this file is `bash` syntax, ymmv with other shells):
 ```sh
+$ source dev.env
 $ turbo run dev
 ```
 Apps should launch locally at:
