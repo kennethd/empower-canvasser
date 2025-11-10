@@ -16,28 +16,36 @@ export default async function ActivitiesServerComponent() {
   const activities = await fetchActivities();
 
   return (
-    <div>
 
+    <div id="activity-log-div">
       <table>
+        <thead>
           <tr>
             <th>canvassee name</th>
             <th>canvassee email</th>
             <th>canvassee mobile</th>
             <th>canvasser name</th>
           </tr>
-        {activities.map((activity) => (
-          <tr id={ 'activity_' + activity.id }>
-            <td>{activity.canvassee.name}</li>
-            <td>{activity.canvassee.email}</li>
-            <td>{activity.canvassee.mobile}</li>
-            <td>{activity.canvasser.name}</li>
-          </tr>
-          <tr>
-            <td colspan="4">{activity.notes}</td>
-          </tr>
-        ))}
-      </table>
+        </thead>
+        <tbody>
 
+        {activities.map((activity) => (
+
+          <tr id={ 'activity_' + activity.id }>
+            <td>{activity.canvasser.name}</td>
+            <td>{activity.canvassee.name}</td>
+            <td>
+                {activity.canvassee.email} <br />
+                {activity.canvassee.mobile}
+            </td>
+            <td>{activity.notes}</td>
+          </tr>
+
+        ))}
+
+        </tbody>
+      </table>
     </div>
+    
   );
 }
