@@ -313,6 +313,16 @@ index 09ecb8a..2e60bb0 100644
          "types": "./dist/es/counter-button.d.mts",
 ```
 
+### stylin' components
+So we have some data dumps on the screen, traversing the full stack, but we
+want a much prettier, more react-like UX.  Let's start with `react-data-grid`:
+```sh
+$ pnpm add react-data-grid --filter ui
+$ pnpm add react-data-grid --filter canvasser
+```
+
+
+
 ## next steps: adding something like auth
 I don't want to implemement an auth system for this, but to test the UI let's
 add a link to the list of canvassers to impersonate/"log in" as one of those.

@@ -1,3 +1,5 @@
+import 'react-data-grid/lib/styles.css';
+
 import "./styles.css";
 
 export default function RootLayout({

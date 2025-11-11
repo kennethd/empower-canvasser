@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// TODO: where to put type defs?
-// TODO: where to put constants?
+import { DataGrid, type Column } from 'react-data-grid';
+
 const API_SERVER_URL = process.env.API_SERVER_URL || "http://localhost:5001";
 
 // canvas_activity rows with dereferenced INNER JOINs on canvasser, canvassee
@@ -32,42 +32,51 @@ async function fetchActivities(): Promise<Activity[]> {
   return response.data;
 }
 
+interface Row {
+  id: number;
+  created: string;
+  canvasser_name: string;
+  canvassee_name: string;
+  canvassee_mobile: string;
+  notes: notes;
+}
+
+const columns: Column<Row>[] = [
+  { key: 'id', name: 'ID' },
+  { key: 'created', name: 'Timestamp' },
+  { key: 'canvasser_name', name: 'Canvasser' },
+  { key: 'canvassee_name', name: 'Canvassee' },
+  { key: 'canvassee_mobile', name: 'Phone' },
+  //{ key: 'canvassee_email', name: 'Email' },
+  { key: 'notes', name: 'Notes' },
+];
+
+function rowKeyGetter(row: Row) {
+  return row.id;
+}
+
 export async function ActivitiesLog() {
   const activities = await fetchActivities();
 
+  const rows = activities.map((activity) => {
+    return {
+      id: activity.id,
+      created: activity.created.split('.')[0].replace('T', ' '),
+      //canvasser_id: activity.canvasser.id,
+      canvasser_name: activity.canvasser.name,
+      //canvasser_mobile: activity.canvasser.mobile,
+      //canvasser_email: activity.canvasser.email,
+      //canvassee_id: activity.canvassee.id,
+      canvassee_name: activity.canvassee.name,
+      canvassee_mobile: activity.canvassee.mobile,
+      //canvassee_email: activity.canvassee.email,
+      //canvassee_sms_ok: activity.canvassee.sms_ok,
+      //canvassee_street_address: activity.canvassee.street_address,
+      notes: activity.notes,
+    } as Row;
+  });
+
   return (
-
-    <div id="activity-log-div">
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>canvasser name</th>
-            <th>canvassee name</th>
-            <th>canvassee contact</th>
-            <th>canvassee mobile</th>
-          </tr>
-        </thead>
-        <tbody>
-
-        {activities.map((activity) => (
-
-          <tr id={ 'activity_' + activity.id }>
-            <td>{activity.created.split('.')[0].replace('T', ' ')}</td>
-            <td>{activity.canvasser.name}</td>
-            <td>{activity.canvassee.name}</td>
-            <td>
-                {activity.canvassee.email} <br />
-                {activity.canvassee.mobile}
-            </td>
-            <td>{activity.notes}</td>
-          </tr>
-
-        ))}
-
-        </tbody>
-      </table>
-    </div>
-    
+    <DataGrid columns={columns} rows={rows} rowKeyGetter={rowKeyGetter} />
   );
 }
