@@ -34,7 +34,7 @@ async function fetchActivities(): Promise<Activity[]> {
   return response.data;
 }
 
-interface Row {
+type Row = {
   id: number;
   created: string;
   canvasser_name: string;
@@ -74,6 +74,10 @@ export async function ActivitiesLog() {
   console.log(rows);
 
   return (
+
+  <div id="activities-log-div">
     <DataGrid columns={columns} rows={rows} rowKeyGetter={rowKeyGetter} />
+  </div>
+
   );
 }
