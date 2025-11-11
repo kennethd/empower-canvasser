@@ -40,18 +40,8 @@ interface Row {
   canvasser_name: string;
   canvassee_name: string;
   canvassee_mobile: string;
-  notes: notes;
+  notes: string;
 }
-
-const columns: Column<Row>[] = [
-  { key: 'id', name: 'ID' },
-  { key: 'created', name: 'Timestamp' },
-  { key: 'canvasser_name', name: 'Canvasser' },
-  { key: 'canvassee_name', name: 'Canvassee' },
-  { key: 'canvassee_mobile', name: 'Phone' },
-  //{ key: 'canvassee_email', name: 'Email' },
-  { key: 'notes', name: 'Notes' },
-];
 
 function rowKeyGetter(row: Row) {
   return row.id;
@@ -60,23 +50,28 @@ function rowKeyGetter(row: Row) {
 export async function ActivitiesLog() {
   const activities = await fetchActivities();
 
+  const columns: Column<Row>[] = [
+    { key: 'id', name: 'ID' },
+    { key: 'created', name: 'Timestamp' },
+    { key: 'canvasser_name', name: 'Canvasser' },
+    { key: 'canvassee_name', name: 'Canvassee' },
+    { key: 'canvassee_mobile', name: 'Phone' },
+    { key: 'notes', name: 'Notes' },
+  ];
+
   const rows = activities.map((activity) => {
     return {
       id: activity.id,
       created: activity.created.split('.')[0].replace('T', ' '),
-      //canvasser_id: activity.canvasser.id,
       canvasser_name: activity.canvasser.name,
-      //canvasser_mobile: activity.canvasser.mobile,
-      //canvasser_email: activity.canvasser.email,
-      //canvassee_id: activity.canvassee.id,
       canvassee_name: activity.canvassee.name,
       canvassee_mobile: activity.canvassee.mobile,
-      //canvassee_email: activity.canvassee.email,
-      //canvassee_sms_ok: activity.canvassee.sms_ok,
-      //canvassee_street_address: activity.canvassee.street_address,
       notes: activity.notes,
     } as Row;
   });
+
+  console.log(columns);
+  console.log(rows);
 
   return (
     <DataGrid columns={columns} rows={rows} rowKeyGetter={rowKeyGetter} />
