@@ -48,9 +48,16 @@
     "test": "jest"
   },
   "jest": {
+    "transform": {
+      "^.+\\\\(t|j)sx?$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(react-data-grid))"
+    ],
     "preset": "@repo/jest-presets/browser"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.28.5",
     "@jest/globals": "^29.7.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/jest-presets": "workspace:*",

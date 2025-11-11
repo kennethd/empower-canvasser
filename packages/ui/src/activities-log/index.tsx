@@ -1,3 +1,5 @@
+'use client'
+
 import axios from 'axios';
 
 import { DataGrid, type Column } from 'react-data-grid';
