@@ -48,7 +48,7 @@ $ turbo run test
 
 ## lagniappe
 
-In addition, the `turborepo` kickstarter recipe I used to create a monorepo
+In addition, the `turborepo` "kitchen sink" recipe I used to create a monorepo
 with multiple frontend & API server apps created a couple more I have done
 nothing with...
 
@@ -70,7 +70,7 @@ nothing with...
   * Implement "soft deletes" @ model level, never delete rows from db, but
     flip a boolean `hidden`/`deleted` boolean column value
   * make all ports configurable by env
-  * add all services to `docker-compose.yaml` for deploy/CI envs
+  * add all services to `docker-compose.yaml` for deploy/CI envs [see here](https://github.com/vercel/turborepo/tree/main/examples/with-docker)
   * put app server running on 3002 behind HTTPS proxy with certbot
   * examine security options: helmet, https://expressjs.com/en/advanced/best-practice-security.html
 
@@ -221,58 +221,43 @@ seems closest to meeting my objectives ([this comment](https://dev.to/joodi/fetc
 on that page is interesting -- it points out this approach loses some built-in
 caching benefits when used in a *Next.js* `ServerComponent`).
 
-Add `axios` to the `canvasser` app's dependencies:
+Add `axios` to the `canvasser` app & `ui` package dependencies:
 ```sh
 $ pnpm add axios --filter canvasser
+$ pnpm add axios --filter ui
 ```
-
-
-## testing components with jest
-Quick example of custom `ServerComponent` test with `jest`, component looks something like:
+Custom components are created in the `ui` package; they look something like
+this example from `packages/ui/src/activities-log/index.tsx`:
 ```ts
+import axios from 'axios';
+
+const API_SERVER_URL = process.env.API_SERVER_URL || "http://localhost:5001";
+
 async function fetchActivities(): Promise<Activity[]> {
   const response = await axios.get(API_SERVER_URL + '/activities');
   return response.data;
 }
 
-export default async function ActivitiesLog() {
+export async function ActivitiesLog() {
   const activities = await fetchActivities();
 
   return (
 
     <div id="activity-log-div">
-      <table>
-        <tbody>
-
+      <ul>
         {activities.map((activity) => (
-
-          <tr id={ 'activity_' + activity.id }>
-            <td>{activity.created.split('.')[0].replace('T', ' ')}</td>
-            <td>{activity.canvasser.name}</td>
-            <td>{activity.canvassee.name}</td>
-            <td>
-                {activity.canvassee.email} <br />
-                {activity.canvassee.mobile}
-            </td>
-            <td>{activity.notes}</td>
-          </tr>
-
+            <li key={activity.id}> {activity.notes} </li>
         ))}
-
-        </tbody>
-      </table>
+      </ul>
     </div>
-    
+
   );
 }
 ```
-To test the call to the API server is mocked at the underlying `axios` library
-level, the contents of data fixture `./activities.json` has been copied from
-postman response to actual endpoint.
 
-This test only verifies `render()` doesn't blow up, a more complete test might
-check for expected page elements, or if there are plans for e2e testing with a
-prepared dataset, it's usually more appropriate to test UI elements there:
+### testing components with jest
+Component tests go into a parallel file to the component itself, such as 
+`packages/ui/src/activities-log/index.test.tsx`:
 ```ts
 import { describe, it } from "@jest/globals";
 import { createRoot } from "react-dom/client";
@@ -291,6 +276,39 @@ describe("ActivityLog", () => {
     root.unmount();
   });
 });
+```
+To test, the call to the API server is mocked at the underlying `axios` library
+level, the contents of data fixture `./activities.json` has been copied from
+postman response to actual endpoint.
+
+This test only verifies `render()` doesn't blow up, a more complete test might
+check for expected page elements, or if there are plans for e2e testing with a
+prepared dataset, it's usually more appropriate to test UI elements there:
+
+### don't forget! update package.json
+Add your new component to the `ui` package's `package.json`:
+```diff
+diff --git a/packages/ui/package.json b/packages/ui/package.json
+index 09ecb8a..2e60bb0 100644
+--- a/packages/ui/package.json
++++ b/packages/ui/package.json
+@@ -9,6 +9,16 @@
+     "dist"
+   ],
+   "exports": {
++    "./activities-log": {
++      "import": {
++        "types": "./dist/es/activities-log.d.mts",
++        "default": "./dist/es/activities-log.mjs"
++      },
++      "require": {
++        "types": "./dist/cjs/activities-log.d.ts",
++        "default": "./dist/cjs/activities-log.js"
++      }
++    },
+     "./counter-button": {
+       "import": {
+         "types": "./dist/es/counter-button.d.mts",
 ```
 
 ## next steps: adding something like auth

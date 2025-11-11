@@ -349,6 +349,9 @@ importers:
       '@types/react-dom':
         specifier: '>=18'
         version: 19.2.2(@types/react@19.2.2)
+      axios:
+        specifier: ^1.13.2
+        version: 1.13.2
       react:
         specifier: '>=18'
         version: 19.2.0

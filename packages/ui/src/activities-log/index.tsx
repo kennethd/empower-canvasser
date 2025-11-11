@@ -32,7 +32,7 @@ async function fetchActivities(): Promise<Activity[]> {
   return response.data;
 }
 
-export default async function ActivitiesLog() {
+export async function ActivitiesLog() {
   const activities = await fetchActivities();
 
   return (
