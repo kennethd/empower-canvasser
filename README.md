@@ -226,6 +226,8 @@ Add `axios` to the `canvasser` app & `ui` package dependencies:
 $ pnpm add axios --filter canvasser
 $ pnpm add axios --filter ui
 ```
+
+### create custom JSX components for Next.js
 Custom components are created in the `ui` package; they look something like
 this example from `packages/ui/src/activities-log/index.tsx`:
 ```ts
