@@ -11,6 +11,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.5",
+    "@mui/x-data-grid": "^8.17.0",
     "@repo/logger": "workspace:*",
     "@repo/ui": "workspace:*",
     "axios": "^1.13.2",

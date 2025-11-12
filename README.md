@@ -313,6 +313,16 @@ index 09ecb8a..2e60bb0 100644
          "types": "./dist/es/counter-button.d.mts",
 ```
 
+### stylin' jsx
+I am admittedly kind of arbitrarily choosing front-end components with my
+primary concern being TypeScript compatibility, this one seems popular...
+```sh
+$ pnpm add @mui/material @emotion/react @emotion/styled --filter ui --filter canvasser
+$ pnpm add @mui/x-data-grid --filter ui --filter canvasser
+$ pnpm install --workspace-root --save-dev identity-obj-proxy
+```
+
+
 ## next steps: adding something like auth
 I don't want to implemement an auth system for this, but to test the UI let's
 add a link to the list of canvassers to impersonate/"log in" as one of those.

@@ -1,3 +1,8 @@
+// seems like a bug-to-track-down, needing these next two lines
+// https://stackoverflow.com/questions/68468203/why-am-i-getting-textencoder-is-not-defined-in-jest
+import { TextEncoder, TextDecoder } from 'util';
+Object.assign(global, { TextDecoder, TextEncoder });
+
 import { describe, it } from "@jest/globals";
 import { createRoot } from "react-dom/client";
 import { ActivityLog } from ".";

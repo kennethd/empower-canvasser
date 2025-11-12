@@ -1,7 +1,9 @@
+'use client'
+
 import axios from 'axios';
 
-// TODO: where to put type defs?
-// TODO: where to put constants?
+import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+
 const API_SERVER_URL = process.env.API_SERVER_URL || "http://localhost:5001";
 
 // canvas_activity rows with dereferenced INNER JOINs on canvasser, canvassee
@@ -35,39 +37,36 @@ async function fetchActivities(): Promise<Activity[]> {
 export async function ActivitiesLog() {
   const activities = await fetchActivities();
 
+  const columns: GridColDef[] = [
+    { field: 'id', headerName: 'ID' },
+    { field: 'created', headerName: 'Timestamp' },
+    { field: 'canvasser_headerName', name: 'Canvasser' },
+    { field: 'canvassee_headerName', name: 'Canvassee' },
+    { field: 'canvassee_mobile', headerName: 'Phone' },
+    { field: 'notes', headerName: 'Notes' },
+  ];
+
+  const rows: GridRowsProp[] = activities.map((activity) => {
+    return {
+      id: activity.id,
+      created: activity.created.split('.')[0].replace('T', ' '),
+      canvasser_name: activity.canvasser.name,
+      canvassee_name: activity.canvassee.name,
+      canvassee_mobile: activity.canvassee.mobile,
+      notes: activity.notes,
+    };
+  });
+
+  console.log(columns);
+  console.log(rows);
+
   return (
 
-    <div id="activity-log-div">
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>canvasser name</th>
-            <th>canvassee name</th>
-            <th>canvassee contact</th>
-            <th>canvassee mobile</th>
-          </tr>
-        </thead>
-        <tbody>
+  <div id="activities-log-div" style={{ height: 300, width: '100%' }}>
+    <DataGrid experimentalFeatures={{ ariaV7: true }}
+      columns={columns} rows={rows}
+      />
+  </div>
 
-        {activities.map((activity) => (
-
-          <tr id={ 'activity_' + activity.id }>
-            <td>{activity.created.split('.')[0].replace('T', ' ')}</td>
-            <td>{activity.canvasser.name}</td>
-            <td>{activity.canvassee.name}</td>
-            <td>
-                {activity.canvassee.email} <br />
-                {activity.canvassee.mobile}
-            </td>
-            <td>{activity.notes}</td>
-          </tr>
-
-        ))}
-
-        </tbody>
-      </table>
-    </div>
-    
   );
 }
