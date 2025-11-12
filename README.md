@@ -38,7 +38,7 @@ $ turbo run dev
 Apps should launch locally at:
 
   * Canvasser Next.js app: http://localhost:3002/
-  * Express API server: http://localhost:5001/status & http://localhost/message/world
+  * Express API server: http://localhost:5001/status & http://localhost:5001/message/world
 
 Commands to run tests/linter are:
 ```sh
